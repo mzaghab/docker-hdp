@@ -1,41 +1,53 @@
 version: '3'
 services:
     console.dev:
-        image: mzaghab/base-node:1
+        image: mzaghab/console:1
         hostname: console.dev
         tty: yes
         stdin_open: true
         privileged: true
+        volumes:
+            - .:/home/project
         networks:
             - dev
 
     master1.dev:
         image: mzaghab/base-node:1
         hostname: master1.dev
+        tty: yes
+        stdin_open: true
         networks:
             - dev
 
     master2.dev:
         image: mzaghab/base-node:1
         hostname: master2.dev
+        tty: yes
+        stdin_open: true
         networks:
             - dev
 
     slave1.dev:
         image: mzaghab/base-node:1
         hostname: slave1.dev
+        tty: yes
+        stdin_open: true
         networks:
             - dev
 
     slave2.dev:
         image: mzaghab/base-node:1
         hostname: slave2.dev
+        tty: yes
+        stdin_open: true
         networks:
             - dev
 
     slave3.dev:
         image: mzaghab/base-node:1
         hostname: slave3.dev
+        tty: yes
+        stdin_open: true
         networks:
             - dev
 networks:

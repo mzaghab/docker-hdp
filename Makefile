@@ -3,6 +3,7 @@ dockerRepo=mzaghab
 imageName=base-node
 version=1
 taggedImageName=$(dockerRepo)/$(imageName):$(version)
+taggedConsoleName=$(dockerRepo)/console:$(version)
 #latestImageName=$(imageName):latest
 consoleImage=console.dev
 dockerfile=images/base-node/
@@ -14,8 +15,11 @@ dockerfile=images/base-node/
 #command=
 
 build:
-	echo "Building image $(taggedImageName) from folder $(dockerfile)"
+	echo "Building image $(taggedImageName)"
 	docker build -t $(taggedImageName) $(dockerfile)
+
+	echo "Building image $(taggedConsoleName)"
+	docker build -t $(taggedConsoleName) images/console/
 
 exec:
 	docker-compose  up -d;docker-compose exec --privileged $(consoleImage) /bin/bash

@@ -4,7 +4,7 @@ LABEL maintainer="Mounir ZAGHAB"
 
 ENV ANSIBLE_VERSION 2.5.0
 
-# TODO install ansible
+RUN yum install -y wget screen sudo && yum clean all
 
 # Install pip
 RUN yum install -y epel-release && \
@@ -27,7 +27,18 @@ RUN pip install ansible==$ANSIBLE_VERSION
 
 #RUN groupadd --non-unique -g ${GROUP_ID} ${USER_NAME}
 #RUN useradd -g ${GROUP_ID} -u ${USER_ID} -k /root -m ${USER_NAME}
-RUN useradd -k /root -m deploy_user
+#RUN useradd -k /root -m deploy_user
+
+RUN useradd -m -s /bin/bash deploy_user
+RUN mkdir -p /home/deploy_user/.ssh
+RUN chmod 0700 /home/deploy_user/.ssh
+COPY files/id_rsa /home/deploy_user/.ssh/id_rsa
+#echo '{{phenix_adm_private_key}}' > /home/deploy_user/.ssh/id_rsa
+RUN chmod 0600 /home/deploy_user/.ssh/id_rsa
+RUN chown -R  deploy_user /home/deploy_user
+
+
+RUN echo "%deploy_user ALL= NOPASSWD: ALL" >> /etc/sudoers
 
 CMD [ "/bin/bash" ]
 

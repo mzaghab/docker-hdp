@@ -25,19 +25,9 @@ RUN yum install -y openssl-devel python-cffi python-jinja2 libffi libffi-devel
 # Ansible
 RUN pip install ansible==$ANSIBLE_VERSION
 
-#ONBUILD ARG USER_ID=1000
-#ONBUILD ARG GROUP_ID=50
-#ONBUILD ARG USER_NAME=toto
-
-#ONBUILD ENV USER_ID ${USER_ID}
-#ONBUILD ENV GROUP_ID ${GROUP_ID}
-#ONBUILD ENV USER_NAME ${USER_NAME}
-
-#ONBUILD RUN groupadd --non-unique -g ${GROUP_ID} ${USER_NAME}
-#ONBUILD RUN useradd -g ${GROUP_ID} -u ${USER_ID} -k /root -m ${USER_NAME}
-RUN useradd -k /root -m mounir
-
-USER mounir
+#RUN groupadd --non-unique -g ${GROUP_ID} ${USER_NAME}
+#RUN useradd -g ${GROUP_ID} -u ${USER_ID} -k /root -m ${USER_NAME}
+RUN useradd -k /root -m deploy_user
 
 CMD [ "/bin/bash" ]
 

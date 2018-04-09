@@ -9,7 +9,7 @@ dockerfile=Dockerfile
 command=
 
 build:
-	docker build $(buildArgs) --no-cache --build-arg ftp_proxy --build-arg http_proxy --build-arg https_proxy --build-arg no_proxy --build-arg FTP_PROXY --build-arg HTTP_PROXY --build-arg HTTPS_PROXY  --build-arg NO_PROXY -t $(taggedImageName) .
+	docker build $(buildArgs) --no-cache -t $(taggedImageName) .
 
 rmi:
 	docker rmi -f $(taggedImageName)

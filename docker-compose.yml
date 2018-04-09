@@ -6,6 +6,7 @@ services:
         tty: yes
         stdin_open: true
         privileged: true
+        user: mounir
         volumes:
             - .:/home/project
         networks:

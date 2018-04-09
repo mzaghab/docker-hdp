@@ -1,3 +1,4 @@
+# https://docs.docker.com/compose/compose-file/
 version: '3'
 services:
     console.dev:
@@ -7,6 +8,7 @@ services:
         stdin_open: true
         privileged: true
         user: deploy_user
+        working_dir: /home/project
         volumes:
             - .:/home/project
         networks:

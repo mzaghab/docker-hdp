@@ -1,12 +1,12 @@
 #current_dir = $(shell pwd)
-dockerRepo=mzaghab
-imageName=base-node
-version=1
-taggedImageName=$(dockerRepo)/$(imageName):$(version)
-taggedConsoleName=$(dockerRepo)/console:$(version)
+#dockerRepo=mzaghab
+#imageName=base-node
+#version=1
+#taggedImageName=$(dockerRepo)/$(imageName):$(version)
+#taggedConsoleName=$(dockerRepo)/console:$(version)
 #latestImageName=$(imageName):latest
 consoleImage=console.dev
-dockerfile=images/base-node/
+#dockerfile=
 #host = $(shell if [ -n "$(shell which boot2docker)" ]; then boot2docker ip; else echo 127.0.0.1; fi)
 
 #MAC boot2docker , linux => ifconfig...
@@ -15,11 +15,15 @@ dockerfile=images/base-node/
 #command=
 
 build:
-	echo "Building image $(taggedImageName)"
-	docker build -t $(taggedImageName) $(dockerfile)
+	echo "***************** Building image base-node"
+	cd images/base-node/;make build;cd ../../
 
-	echo "Building image $(taggedConsoleName)"
-	docker build -t $(taggedConsoleName) images/console/
+	echo "***************** Building image console"
+	cd images/console/;make build;cd ../../
+#	docker build -t $(taggedImageName) images/base-node/
+
+#	echo "Building image $(taggedConsoleName)"
+#	docker build -t $(taggedConsoleName) images/console/
 
 exec:
 	docker-compose  up -d;docker-compose exec --privileged $(consoleImage) /bin/bash
